@@ -1,0 +1,55 @@
+import {Post} from '../types';
+
+export const POSTS: Post[] = [
+  {
+    id: '1',
+    username: 'Amit saxena',
+    avatarLabel: 'A',
+    avatarColor: ['#667eea', '#764ba2'],
+    isFollowing: false,
+    date: '7th July',
+    location: 'Sec-15, Noida',
+    views: '253 Views',
+    title:
+      "Kerala journalist Siddique Kappan's mother passes away at 90.....",
+    duration: '1:00',
+    currentTime: '0:15',
+    progress: 0.15,
+    isPlaying: true,
+    liked: true,
+  },
+  {
+    id: '2',
+    username: 'Nidhi gupta',
+    avatarLabel: 'N',
+    avatarColor: ['#11998e', '#38ef7d'],
+    isFollowing: true,
+    date: '5th May',
+    location: 'New Delhi',
+    views: '1.2k Views',
+    title:
+      'PM Modi addresses nation on economic growth and digital India initiative...',
+    duration: '2:30',
+    currentTime: '0:00',
+    progress: 0,
+    isPlaying: false,
+    liked: false,
+  },
+  {
+    id: '3',
+    username: 'Rahul Sharma',
+    avatarLabel: 'R',
+    avatarColor: ['#f7971e', '#ffd200'],
+    isFollowing: false,
+    date: '3rd May',
+    location: 'Mumbai',
+    views: '5.8k Views',
+    title:
+      'Mumbai local train services resume after heavy rainfall disruption across city...',
+    duration: '3:15',
+    currentTime: '0:00',
+    progress: 0,
+    isPlaying: false,
+    liked: false,
+  },
+];
