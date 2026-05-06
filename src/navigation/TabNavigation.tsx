@@ -17,23 +17,23 @@ const TabNavigation = () => {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
+         tabBarHideOnKeyboard: true,
 
         tabBarStyle: {
           height: 60,
           backgroundColor: '#fff',
           borderTopLeftRadius: 25,
           borderTopRightRadius: 25,
-          position: 'absolute',
-          elevation: 10,
-          shadowColor: '#000',
+          elevation: 0,
           shadowOpacity: 0.1,
           shadowRadius: 10,
+
         },
 
         tabBarItemStyle: {
           alignItems: 'center',
           justifyContent: 'center',
-          paddingTop: 10, 
+          paddingTop: 10,
         },
 
         tabBarIcon: ({ focused }) => {
@@ -58,7 +58,7 @@ const TabNavigation = () => {
                       marginTop: 4,
                       width: 18,
                       height: 3,
-                      backgroundColor: '#0b4f5c',
+                      // backgroundColor: '#0b4f5c',
                       borderRadius: 10,
                     }}
                   />
@@ -67,23 +67,26 @@ const TabNavigation = () => {
             );
           }
 
-          // CENTER BUTTON (NO LINE HERE)
           if (route.name === 'Create') {
             return (
-              <View
-                style={{
-                  position: 'absolute',
-                  bottom: 4,
-                  width: 60,
-                  height: 60,
-                  borderRadius: 30,
-                  backgroundColor: '#0b4f5c',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  elevation: 8,
-                }}
-              >
-                <Ionicons name="add" size={28} color="#fff" />
+              <View style={{ alignItems: 'center' }}>
+                <Ionicons
+                  name={focused ? 'add-circle' : 'add-circle-outline'}
+                  size={26}
+                  color={focused ? '#0b4f5c' : 'gray'}
+                />
+
+                {focused && (
+                  <View
+                    style={{
+                      marginTop: 4,
+                      width: 18,
+                      height: 3,
+                      backgroundColor: '#0b4f5c',
+                      borderRadius: 10,
+                    }}
+                  />
+                )}
               </View>
             );
           }
@@ -121,7 +124,7 @@ const TabNavigation = () => {
                   }}
                 />
               )}
-            
+
             </View>
           );
         }

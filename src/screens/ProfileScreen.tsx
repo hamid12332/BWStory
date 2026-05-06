@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
 
   // ── Header ──
   header: {
-    backgroundColor: Colors.header,       // dark teal #1a2b3c
+    backgroundColor: Colors.header,    
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   formGroup: {
-    marginBottom: 20,
+    marginBottom: 35,
   },
   label: {
     fontSize: 13,
@@ -254,7 +254,8 @@ const styles = StyleSheet.create({
   wordCount: {
     textAlign: 'right',
     paddingRight: 14,
-    paddingBottom: 8,
+    paddingBottom: 10,
+    marginTop: 4,
     fontSize: 12,
     color: Colors.muted,
     fontWeight: '500',

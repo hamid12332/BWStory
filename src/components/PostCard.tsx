@@ -57,8 +57,8 @@ const PostCard: React.FC<PostCardProps> = ({ post, onFollowToggle, onLikeToggle 
         onPlayPause={() => setIsPlaying(!isPlaying)}
         onRewind={() => { }}
         onForward={() => { }}
-        uri="GTC6_gDeZcU"          // ✅ force same video
-        videoType="youtube"       // ✅ force type
+        uri="GTC6_gDeZcU"         
+        videoType="youtube" 
       />
 
       {/* Meta */}

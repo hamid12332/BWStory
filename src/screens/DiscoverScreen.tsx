@@ -75,7 +75,7 @@ const DiscoverScreen: React.FC = () => {
         )}
         contentContainerStyle={{
           paddingTop: 8,
-          paddingBottom: 40, 
+          paddingBottom: 20, 
         }}
       />
     </SafeAreaView>

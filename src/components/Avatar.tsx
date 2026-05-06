@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native'; // ← add Image
 
 interface AvatarProps {
   label: string;
   colors: string[];
   size?: number;
   fontSize?: number;
-  uri?: string; 
+  uri?: string;
 }
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -14,6 +14,7 @@ const Avatar: React.FC<AvatarProps> = ({
   colors,
   size = 36,
   fontSize = 14,
+  uri, // ← was missing here!
 }) => {
   return (
     <View
@@ -26,7 +27,15 @@ const Avatar: React.FC<AvatarProps> = ({
           backgroundColor: colors[0],
         },
       ]}>
-      <Text style={[styles.label, {fontSize}]}>{label}</Text>
+      {uri ? (
+        <Image
+          source={{ uri }}
+          style={{ width: size, height: size, borderRadius: size / 2 }}
+          resizeMode="cover"
+        />
+      ) : (
+        <Text style={[styles.label, { fontSize }]}>{label}</Text>
+      )}
     </View>
   );
 };
