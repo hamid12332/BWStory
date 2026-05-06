@@ -6,6 +6,7 @@ interface AvatarProps {
   colors: string[];
   size?: number;
   fontSize?: number;
+  uri?: string; 
 }
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
   avatar: {
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
   },
   label: {
     color: '#fff',

@@ -16,14 +16,14 @@ import Icon from 'react-native-vector-icons/Feather';
 import {Colors} from '../theme/colors';
 
 const {width} = Dimensions.get('window');
-const COVER_HEIGHT = 260;
+const COVER_HEIGHT = 230;
 const ProfilePhoto = require('../../assets/image/profile.jpeg');
 
 const ProfileScreen: React.FC = () => {
-  const [name, setName] = useState('Rashmi Desai');
+  const [name, setName] = useState('Anamika Sharma');
   const [gender, setGender] = useState('Female');
-  const [location, setLocation] = useState('Greater Noida');
-  const [profession, setProfession] = useState('Teacher');
+  const [location, setLocation] = useState('Delhi, India');
+  const [profession, setProfession] = useState('Developer');
   const [bio, setBio] = useState(
     '"Once you have everything set on your bio, you can use this tailn Instagram Schedule',
   );

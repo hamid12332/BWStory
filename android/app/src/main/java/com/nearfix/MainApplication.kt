@@ -1,4 +1,4 @@
-package com.nearfix
+package com.wbstory
 
 import android.app.Application
 import com.facebook.react.PackageList

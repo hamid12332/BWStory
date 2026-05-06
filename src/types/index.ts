@@ -1,6 +1,8 @@
 export interface Post {
   id: string;
   username: string;
+   video: string;
+  videoType: 'youtube' | 'mp4';
   avatarLabel: string;
   avatarColor: string[];
   isFollowing: boolean;
@@ -13,6 +15,7 @@ export interface Post {
   progress: number; // 0 to 1
   isPlaying: boolean;
   liked: boolean;
+   avatarUri?: string;
 }
 
 export interface UserProfile {

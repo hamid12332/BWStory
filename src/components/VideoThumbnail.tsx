@@ -1,6 +1,9 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {Colors} from '../theme/colors';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Colors } from '../theme/colors';
+import Icon from 'react-native-vector-icons/Feather';
+import YoutubePlayer from 'react-native-youtube-iframe';
+import Video from 'react-native-video';
 
 interface VideoThumbnailProps {
   isPlaying: boolean;
@@ -10,6 +13,9 @@ interface VideoThumbnailProps {
   onPlayPause: () => void;
   onRewind: () => void;
   onForward: () => void;
+
+  uri: string; 
+  videoType: 'youtube' | 'mp4';
 }
 
 const VideoThumbnail: React.FC<VideoThumbnailProps> = ({
@@ -20,40 +26,48 @@ const VideoThumbnail: React.FC<VideoThumbnailProps> = ({
   onPlayPause,
   onRewind,
   onForward,
+  uri,
+  videoType,
 }) => {
   return (
     <View style={styles.container}>
-      {/* Dark background placeholder */}
-      <View style={styles.placeholder} />
+      
+      {/* VIDEO */}
+      {videoType === 'youtube' ? (
+        <YoutubePlayer
+          height={220}
+          play={isPlaying}
+          videoId={uri}
+        />
+      ) : (
+        <Video
+          source={{ uri }}
+          style={styles.video}
+          paused={!isPlaying}
+          resizeMode="cover"
+        />
+      )}
 
-      {/* Controls overlay */}
+      {/* 3-dot menu */}
+      <TouchableOpacity style={styles.menuBtn}>
+        <Icon name="more-vertical" size={18} color="white" />
+      </TouchableOpacity>
+
+      {/* Controls */}
       <View style={styles.controlsOverlay}>
-        <TouchableOpacity style={styles.ctrlBtn} onPress={onRewind}>
-          <Text style={styles.ctrlIcon}>↺</Text>
-        </TouchableOpacity>
+       
 
-        <TouchableOpacity style={[styles.ctrlBtn, styles.ctrlBtnLarge]} onPress={onPlayPause}>
-          <Text style={styles.ctrlIcon}>{isPlaying ? '⏸' : '▶'}</Text>
-        </TouchableOpacity>
+      
 
-        <TouchableOpacity style={styles.ctrlBtn} onPress={onForward}>
-          <Text style={styles.ctrlIcon}>↻</Text>
-        </TouchableOpacity>
+      
       </View>
 
-      {/* Sound icon */}
-      <View style={styles.soundBtn}>
-        <Text style={styles.soundIcon}>🔊</Text>
-      </View>
 
-      {/* Time */}
-      <Text style={styles.timeText}>
-        {currentTime} / {duration}
-      </Text>
+ 
 
-      {/* Progress bar */}
+      {/* Progress */}
       <View style={styles.progressBar}>
-        <View style={[styles.progressFill, {width: `${progress * 100}%`}]} />
+        <View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
       </View>
     </View>
   );
@@ -62,16 +76,13 @@ const VideoThumbnail: React.FC<VideoThumbnailProps> = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 200,
-    backgroundColor: '#1a1a2e',
+    height: 220,
+    backgroundColor: '#000',
     position: 'relative',
     overflow: 'hidden',
   },
-  placeholder: {
+  video: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#16213e',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   controlsOverlay: {
     position: 'absolute',
@@ -82,40 +93,41 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 28,
   },
   ctrlBtn: {
-    width: 36,
-    height: 36,
+    width: 40,
+    height: 40,
     backgroundColor: 'rgba(255,255,255,0.18)',
-    borderRadius: 18,
+    borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1.5,
-    borderColor: 'rgba(255,255,255,0.3)',
+    marginHorizontal: 10,
   },
   ctrlBtnLarge: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
   },
-  ctrlIcon: {
-    color: Colors.white,
-    fontSize: 16,
+  menuBtn: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   soundBtn: {
     position: 'absolute',
     bottom: 32,
     right: 12,
     backgroundColor: 'rgba(0,0,0,0.4)',
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  soundIcon: {
-    fontSize: 13,
   },
   timeText: {
     position: 'absolute',
@@ -136,7 +148,6 @@ const styles = StyleSheet.create({
   progressFill: {
     height: '100%',
     backgroundColor: Colors.accent2,
-    borderRadius: 2,
   },
 });
 

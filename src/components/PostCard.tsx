@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import {Post} from '../types';
-import {Colors} from '../theme/colors';
+import { Post } from '../types';
+import { Colors } from '../theme/colors';
 import Avatar from './Avatar';
 import VideoThumbnail from './VideoThumbnail';
+import Icon from 'react-native-vector-icons/Feather';
 
 interface PostCardProps {
   post: Post;
@@ -16,7 +17,7 @@ interface PostCardProps {
   onLikeToggle: (id: string) => void;
 }
 
-const PostCard: React.FC<PostCardProps> = ({post, onFollowToggle, onLikeToggle}) => {
+const PostCard: React.FC<PostCardProps> = ({ post, onFollowToggle, onLikeToggle }) => {
   const [isPlaying, setIsPlaying] = useState(post.isPlaying);
   const [showMore, setShowMore] = useState(false);
 
@@ -28,6 +29,7 @@ const PostCard: React.FC<PostCardProps> = ({post, onFollowToggle, onLikeToggle})
           <Avatar
             label={post.avatarLabel}
             colors={post.avatarColor}
+            uri={post.avatarUri}
           />
           <Text style={styles.username}>{post.username}</Text>
         </View>
@@ -42,9 +44,7 @@ const PostCard: React.FC<PostCardProps> = ({post, onFollowToggle, onLikeToggle})
               {post.isFollowing ? 'Following' : 'Follow'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.threeDots}>⋮</Text>
-          </TouchableOpacity>
+
         </View>
       </View>
 
@@ -55,8 +55,10 @@ const PostCard: React.FC<PostCardProps> = ({post, onFollowToggle, onLikeToggle})
         currentTime={post.currentTime}
         duration={post.duration}
         onPlayPause={() => setIsPlaying(!isPlaying)}
-        onRewind={() => {}}
-        onForward={() => {}}
+        onRewind={() => { }}
+        onForward={() => { }}
+        uri="GTC6_gDeZcU"          // ✅ force same video
+        videoType="youtube"       // ✅ force type
       />
 
       {/* Meta */}
@@ -80,13 +82,16 @@ const PostCard: React.FC<PostCardProps> = ({post, onFollowToggle, onLikeToggle})
         <TouchableOpacity
           style={styles.actionBtn}
           onPress={() => onLikeToggle(post.id)}>
-          <Text style={styles.actionIcon}>{post.liked ? '❤️' : '🤍'}</Text>
+          <Icon
+            name={post.liked ? 'heart' : 'heart'}
+            size={20}
+            color={post.liked ? 'red' : Colors.muted}
+          />
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionBtn}>
-          <Text style={styles.actionIcon}>⇄</Text>
-        </TouchableOpacity>
+          <Icon name="share-2" size={20} color={Colors.muted} /></TouchableOpacity>
         <TouchableOpacity style={styles.actionBtn}>
-          <Text style={styles.actionIcon}>💬</Text>
+          <Icon name="message-circle" size={20} color={Colors.muted} />
         </TouchableOpacity>
       </View>
     </View>
@@ -101,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
     shadowColor: Colors.black,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 8,
     elevation: 3,
